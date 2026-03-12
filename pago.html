@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Pago del Parqueadero</title>
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Pago del Parqueadero</h1>
+<p>Finalizar servicio de parqueo</p>
+
+</header>
+
+<div class="formulario">
+
+<h2>Información del vehículo</h2>
+
+<p>Placa: ABC123</p>
+<p>Hora de entrada: 2:00 PM</p>
+<p>Hora de salida: 4:00 PM</p>
+
+<p><strong>Total a pagar: $8.000</strong></p>
+
+<h3>Método de pago</h3>
+
+<select id="metodoPago">
+
+<option>Efectivo</option>
+<option>Tarjeta</option>
+<option>Pago QR</option>
+
+</select>
+
+<br><br>
+
+<button class="btnVehiculo" onclick="confirmarPago()">Confirmar Pago</button>
+
+<br><br>
+
+<a href="index.html" class="btnVehiculo">Volver al Inicio</a>
+
+<div id="mensajePago" class="mensaje" style="display:none"></div>
+
+</div>
+
+<script>
+
+function confirmarPago(){
+
+let metodo = document.getElementById("metodoPago").value;
+
+let mensaje = document.getElementById("mensajePago");
+
+mensaje.style.display="block";
+
+mensaje.innerHTML =
+"<h3>Pago realizado con éxito</h3>" +
+"<p>Método de pago: "+metodo+"</p>" +
+"<p>Gracias por utilizar JAV Parking System</p>";
+
+}
+
+</script>
+
+</body>
+
+</html>
+

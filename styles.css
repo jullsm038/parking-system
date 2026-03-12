@@ -2,101 +2,91 @@ body{
 font-family:'Segoe UI', Arial, sans-serif;
 background:#f4f6f9;
 margin:0;
+text-align:center;
 }
+
+/* HEADER */
 
 header{
 background:linear-gradient(90deg,#1e88e5,#6a1b9a);
 color:white;
-padding:25px;
+padding:15px;
+}
+
+.logo{
 text-align:center;
 }
+
+.tituloLogo{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:15px;
+}
+
+.icono{
+width:50px;
+}
+
+.logo h1{
+margin:0;
+font-size:38px;
+}
+
+.logo p{
+margin-top:5px;
+font-size:16px;
+}
+
+/* CONTENEDOR */
 
 .container{
-padding:30px;
-text-align:center;
+padding:40px;
 }
 
-.card{
-display:inline-block;
-background:white;
-padding:20px;
-margin:20px;
-border-radius:10px;
-width:220px;
-box-shadow:0px 4px 10px rgba(0,0,0,0.1);
+.titulo{
+color:#1e88e5;
+margin-bottom:30px;
 }
 
-.card p{
-font-size:32px;
-color:green;
-}
-
-.buttons a{
-display:block;
-background:#6a1b9a;
-color:white;
-padding:15px;
-margin:10px auto;
-width:220px;
-text-decoration:none;
-border-radius:8px;
-font-weight:bold;
-}
-
-.buttons a:hover{
-background:#4a148c;
-}
+/* BOTONES VEHICULOS */
 
 .vehiculos{
-text-align:center;
-margin-top:20px;
-}
-
-.vehiculos img{
-width:80px;
-margin:15px;
-}
-
-section{
-background:white;
-margin:40px;
-padding:25px;
-border-radius:10px;
-box-shadow:0px 4px 10px rgba(0,0,0,0.1);
-}
-
-section h2{
-color:#1e88e5;
-}
-
-.tipoVehiculo{
-text-align:center;
-margin-top:30px;
-}
-
-.tipoVehiculo h2{
-color:#1e88e5;
-margin-bottom:20px;
+display:flex;
+justify-content:center;
+gap:40px;
+flex-wrap:wrap;
 }
 
 .btnVehiculo{
-display:inline-block;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
 background:white;
-color:black;
-padding:15px 30px;
-margin:10px;
-font-size:16px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
 border:2px solid black;
+border-radius:12px;
+padding:25px;
+width:160px;
+text-decoration:none;
+color:black;
+font-weight:bold;
 transition:0.3s;
+box-shadow:0px 4px 10px rgba(0,0,0,0.1);
+}
+
+.btnVehiculo img{
+width:70px;
+margin-bottom:10px;
 }
 
 .btnVehiculo:hover{
-background:black;
+background:#1e88e5;
 color:white;
+transform:scale(1.05);
 }
+
+/* PARQUEADERO */
 
 .parking{
 display:grid;
@@ -126,4 +116,32 @@ background:#2ecc71;
 background:#e74c3c;
 }
 
+/* FORMULARIO REGISTRO */
 
+.formulario{
+background:white;
+width:400px;
+margin:40px auto;
+padding:30px;
+border-radius:10px;
+box-shadow:0px 4px 10px rgba(0,0,0,0.1);
+}
+
+.formulario input,
+.formulario select{
+width:90%;
+padding:10px;
+margin:10px;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+/* MENSAJE DE CONFIRMACION */
+
+.mensaje{
+background:#e3f2fd;
+border:2px solid #1e88e5;
+padding:20px;
+margin-top:20px;
+border-radius:8px;
+}

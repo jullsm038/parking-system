@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Registro de Vehiculo</title>
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Registro de Vehículo</h1>
+<p>Ingreso al parqueadero</p>
+
+</header>
+
+<div class="formulario">
+
+<h2>Ingrese los datos del vehículo</h2>
+
+<label>Placa del vehículo</label>
+<input type="text" id="placa" placeholder="Ej: ABC123">
+
+<label>Tipo de vehículo</label>
+<input type="text" id="tipoVehiculo" readonly>
+
+<label>Hora de entrada</label>
+<input type="time" id="horaEntrada">
+
+<br><br>
+
+<button class="btnVehiculo" onclick="registroVehiculo()">Registrar Ingreso</button>
+
+<br><br>
+
+<a href="parqueadero.html" class="btnVehiculo">Ver Parqueadero</a>
+
+<div id="mensajeRegistro" class="mensaje" style="display:none"></div>
+
+<h2>Vehículos registrados</h2>
+
+<table border="1" id="tablaVehiculos">
+
+<tr>
+<th>Placa</th>
+<th>Tipo</th>
+<th>Hora de ingreso</th>
+</tr>
+
+</table>
+
+</div>
+
+<script>
+
+// Obtener tipo de vehículo desde la URL
+const parametros = new URLSearchParams(window.location.search);
+const tipo = parametros.get("vehiculo");
+
+if(tipo){
+document.getElementById("tipoVehiculo").value = tipo;
+}
+
+// Generar hora automática
+window.onload = function(){
+
+let ahora = new Date();
+
+let horas = ahora.getHours().toString().padStart(2,'0');
+let minutos = ahora.getMinutes().toString().padStart(2,'0');
+
+let horaActual = horas + ":" + minutos;
+
+document.getElementById("horaEntrada").value = horaActual;
+
+}
+
+// Registrar vehículo
+function registroVehiculo(){
+
+let placa = document.getElementById("placa").value;
+let hora = document.getElementById("horaEntrada").value;
+let tipo = document.getElementById("tipoVehiculo").value;
+
+if(placa === ""){
+alert("Por favor ingrese la placa del vehículo");
+return;
+}
+
+let mensaje = document.getElementById("mensajeRegistro");
+
+mensaje.style.display = "block";
+
+mensaje.innerHTML =
+"<h3>Registro exitoso</h3>" +
+"<p>Bienvenido</p>" +
+"<p>Vehículo: "+placa+"</p>" +
+"<p>Tipo: "+tipo+"</p>" +
+"<p>Espacio asignado: A1</p>" +
+"<p>Hora de ingreso: "+hora+"</p>";
+
+guardarRegistro(placa,tipo,hora);
+
+// limpiar campo
+document.getElementById("placa").value = "";
+
+}
+
+// Guardar registro en tabla
+function guardarRegistro(placa,tipo,hora){
+
+let tabla = document.getElementById("tablaVehiculos");
+
+let fila = tabla.insertRow();
+
+fila.insertCell(0).innerText = placa;
+fila.insertCell(1).innerText = tipo;
+fila.insertCell(2).innerText = hora;
+
+}
+
+</script>
+
+</body>
+
+</html>

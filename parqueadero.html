@@ -12,30 +12,51 @@
 
 <header>
 <h1>Mapa del Parqueadero</h1>
-<p>Visualización de espacios disponibles</p>
+<p>Seleccione un espacio disponible</p>
 </header>
 
 <div class="parking">
 
-<div class="space libre">A1</div>
-<div class="space libre">A2</div>
+<div class="space libre" onclick="seleccionar('A1')">A1</div>
+<div class="space libre" onclick="seleccionar('A2')">A2</div>
 <div class="space ocupado">A3</div>
-<div class="space libre">A4</div>
+<div class="space libre" onclick="seleccionar('A4')">A4</div>
 <div class="space ocupado">A5</div>
 
-<div class="space libre">B1</div>
+<div class="space libre" onclick="seleccionar('B1')">B1</div>
 <div class="space ocupado">B2</div>
-<div class="space libre">B3</div>
-<div class="space libre">B4</div>
+<div class="space libre" onclick="seleccionar('B3')">B3</div>
+<div class="space libre" onclick="seleccionar('B4')">B4</div>
 <div class="space ocupado">B5</div>
 
-<div class="space libre">C1</div>
-<div class="space libre">C2</div>
+<div class="space libre" onclick="seleccionar('C1')">C1</div>
+<div class="space libre" onclick="seleccionar('C2')">C2</div>
 <div class="space ocupado">C3</div>
-<div class="space libre">C4</div>
-<div class="space libre">C5</div>
+<div class="space libre" onclick="seleccionar('C4')">C4</div>
+<div class="space libre" onclick="seleccionar('C5')">C5</div>
 
 </div>
+
+<br><br>
+
+<div style="text-align:center">
+
+<p id="espacioSeleccionado"></p>
+
+<a href="pago.html" class="btnVehiculo">Continuar al Pago</a>
+
+</div>
+
+<script>
+
+function seleccionar(espacio){
+
+document.getElementById("espacioSeleccionado").innerHTML =
+"Espacio seleccionado: <b>" + espacio + "</b>";
+
+}
+
+</script>
 
 </body>
 
