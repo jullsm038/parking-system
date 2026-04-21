@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Reportes</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header>
+<h1>Reportes del Sistema</h1>
+</header>
+
+<div class="formulario">
+
+<h2>Vehículos registrados</h2>
+
+<table border="1" id="tablaReportes">
+<tr>
+<th>Placa</th>
+<th>Tipo</th>
+<th>Hora</th>
+</tr>
+</table>
+
+</div>
+
+<script>
+
+let historial = JSON.parse(localStorage.getItem("historial")) || [];
+
+let tabla = document.getElementById("tablaReportes");
+
+historial.forEach(v => {
+
+let fila = tabla.insertRow();
+
+fila.insertCell(0).innerText = v.placa;
+fila.insertCell(1).innerText = v.tipo;
+fila.insertCell(2).innerText = v.horaEntrada;
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Salida de Vehiculo</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header>
+<h1>Salida de Vehículo</h1>
+<p>Ingrese la placa para finalizar</p>
+</header>
+
+<div class="formulario">
+
+<label>Placa del vehículo</label>
+<input type="text" id="placaSalida" placeholder="Ej: ABC123">
+
+<br><br>
+
+<button class="btnAccion" onclick="buscarVehiculo()">Buscar</button>
+
+<div id="mensaje"></div>
+
+</div>
+
+<script>
+
+function buscarVehiculo(){
+
+let placa = document.getElementById("placaSalida").value;
+
+let activos = JSON.parse(localStorage.getItem("vehiculosActivos")) || [];
+
+let vehiculo = activos.find(v => v.placa === placa);
+
+if(vehiculo){
+
+// guardar vehículo para pago
+localStorage.setItem("vehiculoPago", JSON.stringify(vehiculo));
+
+// redirigir a pago
+window.location.href = "pago.html";
+
+}else{
+
+document.getElementById("mensaje").innerHTML =
+"<p style='color:red'>Vehículo no encontrado</p>";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

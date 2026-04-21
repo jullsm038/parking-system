@@ -2,19 +2,15 @@
 <html>
 
 <head>
-
 <title>Registro de Vehiculo</title>
 <link rel="stylesheet" href="styles.css">
-
 </head>
 
 <body>
 
 <header>
-
 <h1>Registro de Vehículo</h1>
 <p>Ingreso al parqueadero</p>
-
 </header>
 
 <div class="formulario">
@@ -32,24 +28,22 @@
 
 <br><br>
 
-<button class="btnVehiculo" onclick="registroVehiculo()">Registrar Ingreso</button>
+<button class="btnAccion" onclick="registroVehiculo()">Registrar Ingreso</button>
 
 <br><br>
 
-<a href="parqueadero.html" class="btnVehiculo">Ver Parqueadero</a>
+<a href="parqueadero.html" class="btnSecundario">Ver Parqueadero</a>
 
 <div id="mensajeRegistro" class="mensaje" style="display:none"></div>
 
 <h2>Vehículos registrados</h2>
 
 <table border="1" id="tablaVehiculos">
-
 <tr>
 <th>Placa</th>
 <th>Tipo</th>
 <th>Hora de ingreso</th>
 </tr>
-
 </table>
 
 </div>
@@ -78,7 +72,7 @@ document.getElementById("horaEntrada").value = horaActual;
 
 }
 
-// Registrar vehículo
+// 🔥 REGISTRAR VEHÍCULO (VERSIÓN FINAL)
 function registroVehiculo(){
 
 let placa = document.getElementById("placa").value;
@@ -90,18 +84,36 @@ alert("Por favor ingrese la placa del vehículo");
 return;
 }
 
+// ✅ CREAR VEHÍCULO
+let vehiculo = {
+placa: placa,
+tipo: tipo,
+horaEntrada: hora
+};
+
+// ✅ GUARDAR VARIOS VEHÍCULOS ACTIVOS
+let activos = JSON.parse(localStorage.getItem("vehiculosActivos")) || [];
+activos.push(vehiculo);
+localStorage.setItem("vehiculosActivos", JSON.stringify(activos));
+
+// ✅ GUARDAR HISTORIAL (reportes)
+let historial = JSON.parse(localStorage.getItem("historial")) || [];
+historial.push(vehiculo);
+localStorage.setItem("historial", JSON.stringify(historial));
+
+// MENSAJE
 let mensaje = document.getElementById("mensajeRegistro");
 
 mensaje.style.display = "block";
 
 mensaje.innerHTML =
 "<h3>Registro exitoso</h3>" +
-"<p>Bienvenido</p>" +
 "<p>Vehículo: "+placa+"</p>" +
 "<p>Tipo: "+tipo+"</p>" +
-"<p>Espacio asignado: A1</p>" +
-"<p>Hora de ingreso: "+hora+"</p>";
+"<p>Hora de ingreso: "+hora+"</p>" +
+"<p>Puede dirigirse al parqueadero</p>";
 
+// Mostrar en tabla
 guardarRegistro(placa,tipo,hora);
 
 // limpiar campo
@@ -109,7 +121,7 @@ document.getElementById("placa").value = "";
 
 }
 
-// Guardar registro en tabla
+// Guardar en tabla
 function guardarRegistro(placa,tipo,hora){
 
 let tabla = document.getElementById("tablaVehiculos");
@@ -125,5 +137,4 @@ fila.insertCell(2).innerText = hora;
 </script>
 
 </body>
-
 </html>

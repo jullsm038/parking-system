@@ -1,0 +1,17 @@
+<script>
+
+function guardarTarifas(){
+
+let tarifas = {
+carro: parseInt(document.getElementById("carro").value) || 4000,
+moto: parseInt(document.getElementById("moto").value) || 3000,
+bici: parseInt(document.getElementById("bici").value) || 2000
+};
+
+localStorage.setItem("tarifas", JSON.stringify(tarifas));
+
+alert("Tarifas guardadas correctamente");
+
+}
+
+</script>

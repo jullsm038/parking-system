@@ -2,39 +2,97 @@
 <html>
 
 <head>
-
 <title>Pago del Parqueadero</title>
 <link rel="stylesheet" href="styles.css">
-
 </head>
 
 <body>
 
 <header>
-
 <h1>Pago del Parqueadero</h1>
 <p>Finalizar servicio de parqueo</p>
-
 </header>
 
-<div class="formulario">
+<div class="formulario" id="contenedorPago">
+</div>
 
+<script>
+
+// 🔥 OBTENER VEHÍCULO DESDE SALIDA
+let vehiculo = JSON.parse(localStorage.getItem("vehiculoPago"));
+let espacio = localStorage.getItem("espacio");
+
+// 🔴 SI NO HAY VEHÍCULO
+if(!vehiculo){
+document.getElementById("contenedorPago").innerHTML =
+"<h3>No hay vehículo seleccionado</h3>" +
+"<p>Debe ingresar por la opción de salida</p>";
+}
+
+// 🔥 SI HAY VEHÍCULO
+if(vehiculo){
+
+let salida = new Date();
+
+let horas = salida.getHours().toString().padStart(2,'0');
+let minutos = salida.getMinutes().toString().padStart(2,'0');
+
+let horaSalida = horas + ":" + minutos;
+
+// 🔥 FUNCIÓN TARIFA
+function calcularTarifa(horaEntrada, tipo){
+
+let entrada = new Date();
+let salida = new Date();
+
+let [h,m] = horaEntrada.split(":");
+
+entrada.setHours(h);
+entrada.setMinutes(m);
+
+let diff = (salida - entrada) / (1000 * 60 * 60);
+
+// 🔥 tarifas desde admin o por defecto
+let tarifas = JSON.parse(localStorage.getItem("tarifas")) || {
+carro: 4000,
+moto: 3000,
+bici: 2000
+};
+
+let tarifa = tarifas[tipo] || 4000;
+
+let horas = Math.ceil(diff);
+
+// mínimo 1 hora
+if(horas < 1){
+horas = 1;
+}
+
+let total = horas * tarifa;
+
+return total;
+}
+
+let total = calcularTarifa(vehiculo.horaEntrada, vehiculo.tipo);
+
+// 🔥 MOSTRAR
+document.getElementById("contenedorPago").innerHTML = `
 <h2>Información del vehículo</h2>
 
-<p>Placa: ABC123</p>
-<p>Hora de entrada: 2:00 PM</p>
-<p>Hora de salida: 4:00 PM</p>
+<p>Placa: ${vehiculo.placa}</p>
+<p>Tipo: ${vehiculo.tipo}</p>
+<p>Espacio: ${espacio || "No asignado"}</p>
+<p>Hora de entrada: ${vehiculo.horaEntrada}</p>
+<p>Hora de salida: ${horaSalida}</p>
 
-<p><strong>Total a pagar: $8.000</strong></p>
+<p><strong>Total a pagar: $${total}</strong></p>
 
 <h3>Método de pago</h3>
 
 <select id="metodoPago">
-
 <option>Efectivo</option>
 <option>Tarjeta</option>
 <option>Pago QR</option>
-
 </select>
 
 <br><br>
@@ -46,11 +104,11 @@
 <a href="index.html" class="btnVehiculo">Volver al Inicio</a>
 
 <div id="mensajePago" class="mensaje" style="display:none"></div>
+`;
 
-</div>
+}
 
-<script>
-
+// 🔥 CONFIRMAR PAGO
 function confirmarPago(){
 
 let metodo = document.getElementById("metodoPago").value;
@@ -64,11 +122,22 @@ mensaje.innerHTML =
 "<p>Método de pago: "+metodo+"</p>" +
 "<p>Gracias por utilizar JAV Parking System</p>";
 
+// 🔥 eliminar vehículo correcto
+let activos = JSON.parse(localStorage.getItem("vehiculosActivos")) || [];
+
+let placa = vehiculo.placa;
+
+activos = activos.filter(v => v.placa !== placa);
+
+localStorage.setItem("vehiculosActivos", JSON.stringify(activos));
+
+// limpiar temporal
+localStorage.removeItem("vehiculoPago");
+
 }
 
 </script>
 
 </body>
-
 </html>
 
